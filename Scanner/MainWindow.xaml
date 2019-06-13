@@ -30,7 +30,7 @@
             <!--<TextBox Grid.Column="2" Name="RecoText" Width="auto" Height="auto"/>-->
 
             <ScrollViewer Grid.Column="2" Name="scroll_viewer">
-                <WrapPanel Name="stack" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Stack_MouseDown">
+                <WrapPanel Name="stack" HorizontalAlignment="Left" VerticalAlignment="Top">
 
                 </WrapPanel>
             </ScrollViewer>

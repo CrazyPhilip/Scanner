@@ -10,6 +10,8 @@ using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Scanner.Threads;
+using JiebaNet.Segmenter;
+using System.Windows.Controls;
 
 namespace Scanner
 {
@@ -246,7 +248,7 @@ namespace Scanner
             //RecoText.Text = Recognize(photo.SharpenedPhoto);
             string RecoText = "";
 
-            RecognizeThread thread = new RecognizeThread(photo.OriginalPhoto);
+            RecognizeThread thread = new RecognizeThread(photo.OriginalPhoto);  //识别原始图片
             ThreadStart childref = new ThreadStart(thread.Recognize);
             Thread childThread = new Thread(childref);
             childThread.Name = "TextRecognition";
@@ -254,7 +256,21 @@ namespace Scanner
             childThread.Join();
 
             RecoText = thread.recoText;
+            var segmenter = new JiebaSegmenter();
+            var segments = segmenter.Cut(RecoText);
 
+            foreach (var word in segments)
+            {
+                Button button = new Button();
+                button.Height = 30;
+                button.Margin = new Thickness(5);
+                //button.Width = 
+
+                button.Content = word;
+
+                stack.Children.Add(button);
+
+            }
         }
         
     }

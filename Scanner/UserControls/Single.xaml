@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Scanner.UserControls.Single"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scanner.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="ChooseButton" Content="选择图片" Width="100" Height="30" Margin="10,0,0,0" Click="ChooseButton_Click"/>
+            <Button Name="SharpenButton" Content="锐化" Width="100" Height="30" Margin="10,0,0,0" Click="SharpenButton_Click"/>
+            <Button Name="RecognizeButton" Content="识别" Width="100" Height="30" Margin="10,0,0,0" Click="RecognizeButton_Click"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="Original" Width="auto" Height="auto"/>
+            <Image Grid.Column="1" Name="Sharpened" Width="auto" Height="auto"/>
+            <!--<TextBox Grid.Column="2" Name="RecoText" Width="auto" Height="auto"/>-->
+
+            <ScrollViewer Grid.Column="2" Name="scroll_viewer">
+                <WrapPanel Name="stack" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                </WrapPanel>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</UserControl>

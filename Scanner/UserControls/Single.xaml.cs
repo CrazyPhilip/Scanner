@@ -23,7 +23,6 @@ namespace Scanner.UserControls
         public Single()
         {
             InitializeComponent();
-            this.DataContext = new SingleViewModel();
         }
     }
 }

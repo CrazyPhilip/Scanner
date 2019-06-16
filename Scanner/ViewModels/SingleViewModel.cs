@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,16 +23,16 @@ namespace Scanner.ViewModels
         public DelegateCommand SharpenCommand { get; set; }
         public DelegateCommand RecognizeCommand { get; set; }
 
-        private static Photo photo =  new Photo();
+        private static Photo photo = new Photo();
         private string originalSource;
         private BitmapSource sharpenedSource;
-
+        private List<Word> words = new List<Word>();
+        
         public SingleViewModel()
         {
             this.ChooseCommand = new DelegateCommand(new Action(this.ChooseCommandExecute));
             this.SharpenCommand = new DelegateCommand(new Action(this.SharpenCommandExecute));
             this.RecognizeCommand = new DelegateCommand(new Action(this.RecognizeCommandExecute));
-
         }
 
         public string OriginalSource
@@ -51,6 +52,16 @@ namespace Scanner.ViewModels
             {
                 sharpenedSource = value;
                 this.RaisePropertyChanged("SharpenedSource");
+            }
+        }
+
+        public List<Word> Words
+        {
+            get { return words; }
+            set
+            {
+                words = value;
+                this.RaisePropertyChanged("Words");
             }
         }
 
@@ -200,22 +211,22 @@ namespace Scanner.ViewModels
             Thread childThread = new Thread(childref);
             childThread.Name = "TextRecognition";
             childThread.Start(); //启动线程
-                                 //childThread.Join();   //等待线程运行结束
+            childThread.Join();   //等待线程运行结束,暂时没有实现异步
 
             RecoText = thread.recoText;
             var segmenter = new JiebaSegmenter();
             var segments = segmenter.Cut(RecoText);
 
+            List<Word> temp = new List<Word>();
             foreach (var word in segments)
             {
-                //Button button = new Button();
-                //button.Height = 30;
-                //button.Margin = new Thickness(5);
-                //
-                //button.Content = word;
-                //stack.Children.Add(button);
+                Word w = new Word();
+                w.word = word;
+
+                temp.Add(w);
             }
 
+            Words = temp;
             //if (childThread.IsAlive)
             //{
             //    childThread.Abort();

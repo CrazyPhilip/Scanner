@@ -123,6 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Word.cs" />
     <Compile Include="Threads\RecognizeThread.cs" />
     <Compile Include="UserControls\Batch.xaml.cs">
       <DependentUpon>Batch.xaml</DependentUpon>

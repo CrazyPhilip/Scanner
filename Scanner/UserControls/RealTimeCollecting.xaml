@@ -3,9 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+             xmlns:aforge ="clr-namespace:AForge.Controls;assembly=AForge.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            
+            <Border Height="300" Width="400" BorderBrush="LightGray">
+                <wfi:WindowsFormsHost Height="300" Width="400">
+                    <aforge:VideoSourcePlayer x:Name="videoSourcePlayer1"/>
+                </wfi:WindowsFormsHost>
+            </Border>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,5">
+                <ComboBox Name="Size" Width="80" Height="30" Margin="5,0" IsEditable="False" IsReadOnly="True">
+                    <ComboBoxItem IsSelected="True">A4</ComboBoxItem>
+                    <ComboBoxItem>4:3</ComboBoxItem>
+                </ComboBox>
+                <Button Name="On_cam" Height="30" Width="80" Click="On_cam_Click" Background="Red" Margin="5,0">开关</Button>
+                <Button Name="Shot" Height="30" Width="80" Click="Shot_Click" Margin="5,0">拍摄</Button>
+                <Button Name="Delete" Height="30" Width="80" Click="Delete_Click" Margin="5,0">删除</Button>
+                <Button Name="Reco" Height="30" Width="80" Click="Reco_Click" Background="Green" Margin="5,0">识别</Button>
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                      BorderBrush="Gray" BorderThickness="2">
+            <ItemsControl ItemsSource="{Binding Photos, Mode=OneTime}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Name="scroll_viewer" BorderBrush="Gray" BorderThickness="2">
+            <ItemsControl ItemsSource="{Binding Words, Mode=OneTime}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

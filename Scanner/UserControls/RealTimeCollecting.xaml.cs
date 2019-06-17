@@ -44,6 +44,7 @@ namespace Scanner.UserControls
                 selectedDeviceIndex = 0;
                 videoSource = new VideoCaptureDevice(videoDevices[selectedDeviceIndex].MonikerString);//连接摄像头。
                 videoSource.VideoResolution = videoSource.VideoCapabilities[selectedDeviceIndex];
+                //videoSource.SetCameraProperty(CameraControlProperty.Tilt,180,CameraControlFlags.Manual);
                 videoSourcePlayer1.VideoSource = videoSource;
                 // set NewFrame event handler
                 videoSourcePlayer1.Start();
